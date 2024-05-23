@@ -4,14 +4,15 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
   );
