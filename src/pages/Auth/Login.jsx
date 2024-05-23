@@ -58,7 +58,7 @@ const Login = () => {
                 </p>
               </div>
 
-              <button className="bg-blue-600 w-full md:w-3/4 mt-4 border-none focus:bg-blue-500 text-center">
+              <button className="bg-blue-600 w-full md:w-3/4 mt-4 border-none focus:bg-blue-500 text-center md:mx-11">
                 {" "}
                 Sign in
               </button>
@@ -67,7 +67,7 @@ const Login = () => {
 
               <div className="withgoogle mt-4">
                 <button
-                  className="bg-gray-900 w-full"
+                  className="bg-gray-900 w-full md:w-3/4 md:mx-11"
                   style={{ backgroundColor: "#131314" }}
                 >
                   Sign in with Google
@@ -75,7 +75,7 @@ const Login = () => {
               </div>
 
               <p className="not_account mt-5 text-center ">
-                Don't have an account ? <a href=""> Signup Now</a>
+                Don't have an account ? <a href="/signup"> Signup Now</a>
               </p>
 
               <p className="logo">
@@ -84,7 +84,7 @@ const Login = () => {
             </div>
           </form>
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 };
