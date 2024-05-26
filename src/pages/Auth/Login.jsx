@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { Signin_Auth, Signup_Auth } from "../../services/Authentication";
 
 const Login = () => {
+  const [user_Email, setuser_Email] = useState("");
+  const [user_Password, setuser_Password] = useState("");
+
+  const User_Details = {
+    email: user_Email,
+    password: user_Password,
+  };
+
+  const login_handler = async (e) => {
+    e.preventDefault();
+
+
+    const response = await Signin_Auth(user_Email, user_Password);
+    console.log(response )
+  };
   return (
     <div className="login_container  w-full">
       <div className="login_body md:flex h-screen ">
@@ -33,6 +49,8 @@ const Login = () => {
                   id="email"
                   placeholder="Enter Email"
                   className="rounded-md border-0 \text-gray-900 p-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-full mt-3 text-lg"
+                  onChange={(e) => setuser_Email(e.target.value)}
+                  value={user_Email}
                 />
               </div>
               <div className="password mt-3">
@@ -48,6 +66,8 @@ const Login = () => {
                   id="password"
                   placeholder="Enter password"
                   className=" rounded-md border-0 \text-gray-900 p-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-full mt-3 text-lg"
+                  onChange={(E) => setuser_Password(E.target.value)}
+                  value={user_Password}
                 />
               </div>
 
@@ -58,7 +78,10 @@ const Login = () => {
                 </p>
               </div>
 
-              <button className="bg-blue-600 w-full md:w-3/4 mt-4 border-none focus:bg-blue-500 text-center md:mx-11">
+              <button
+                className="bg-blue-600 w-full md:w-3/4 mt-4 border-none focus:bg-blue-500 text-center md:mx-11"
+                onClick={login_handler}
+              >
                 {" "}
                 Sign in
               </button>

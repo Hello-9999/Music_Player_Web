@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Signup_Auth } from "../../services/Authentication";
 
 const Signup = ({}) => {
-
   const [form_index, setform_index] = useState(0);
   const [User_details, setUser_details] = useState({
     name: "",
@@ -11,6 +11,8 @@ const Signup = ({}) => {
   const [letter_pass_status, setletter_pass_status] = useState(false);
   const [numSp_pass_status, setnumSp_status] = useState(false);
   const [char_pass_status, setchar_pass_status] = useState(false);
+
+  // console.log()
 
   const Signup_Steeper = [
     {
@@ -70,15 +72,20 @@ const Signup = ({}) => {
       Back.classList.add("hidden");
     }
   }
-  const form_handler = (e) => {
+  const form_handler = async (e) => {
     e.preventDefault();
     const UserDetails = {
       Email: User_details.email,
       password: User_details.password,
       Name: User_details.name,
     };
+    const user_Email = User_details.email;
+    const user_Password = User_details.password;
 
-    console.log(UserDetails, "");
+    const response = await Signup_Auth(user_Email, user_Password);
+    console.log(response.user.auth._currentUser, "re");
+
+    console.log(UserDetails, "detaa");
   };
 
   const handler_input = (e) => {
@@ -93,7 +100,7 @@ const Signup = ({}) => {
     const value = e.target.value;
     const copy_User_details = { ...User_details };
     copy_User_details[id] = value;
-   
+
     if (id === "password") {
       password_Valid.classList.add("block");
       password_Valid.classList.remove("hidden");
@@ -130,6 +137,7 @@ const Signup = ({}) => {
     }
     setUser_details(copy_User_details);
   };
+
 
   return (
     <div className="signup_container">
@@ -230,8 +238,7 @@ const Signup = ({}) => {
                 >
                   Sign Up
                 </button>
-              ) : 
-              Signup_Steeper[form_index].id === "password" ? (
+              ) : Signup_Steeper[form_index].id === "password" ? (
                 <>
                   <button
                     className={
