@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Signup_Auth } from "../../services/Authentication";
+import { useNavigate } from "react-router-dom";
 
 const Signup = ({}) => {
   const [form_index, setform_index] = useState(0);
@@ -12,8 +13,7 @@ const Signup = ({}) => {
   const [numSp_pass_status, setnumSp_status] = useState(false);
   const [char_pass_status, setchar_pass_status] = useState(false);
 
-  // console.log()
-
+  const navigate = useNavigate();
   const Signup_Steeper = [
     {
       id: "email",
@@ -40,6 +40,7 @@ const Signup = ({}) => {
       inputType: "text",
     },
   ];
+
   const handler_form = (e) => {
     e.preventDefault();
     const Steper_Count = document.getElementById("Count_steeper");
@@ -82,10 +83,14 @@ const Signup = ({}) => {
     const user_Email = User_details.email;
     const user_Password = User_details.password;
 
-    const response = await Signup_Auth(user_Email, user_Password);
-    console.log(response.user.auth._currentUser, "re");
-
-    console.log(UserDetails, "detaa");
+    try {
+      const response = await Signup_Auth(user_Email, user_Password);
+      setTimeout(() => {
+        if (response) {
+          navigate("/signin");
+        }
+      }, 3000);
+    } catch (error) {}
   };
 
   const handler_input = (e) => {
@@ -137,7 +142,6 @@ const Signup = ({}) => {
     }
     setUser_details(copy_User_details);
   };
-
 
   return (
     <div className="signup_container">
